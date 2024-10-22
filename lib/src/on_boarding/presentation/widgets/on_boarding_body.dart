@@ -48,7 +48,9 @@ class OnBoardingBody extends StatelessWidget {
                   foregroundColor: Colors.white,
                 ),
                 onPressed: () {
-                  context.read<OnBoardingCubit>().cachFirstTimer();
+                  Navigator.pushNamed(context, '/sign-in',
+                      arguments: 'the data');
+                  // context.read<OnBoardingCubit>().cachFirstTimer();
                 },
                 child: const Text(
                   'Get Started',

@@ -30,18 +30,19 @@ void main() {
     });
 
     blocTest<OnBoardingCubit, OnBoardingState>(
-        'call cacheFirstTimer, emit[CachingFirstTimer, FirstTimerCached] '
-        'when successful',
-        build: () {
-          when(() => cacheFirstTimer())
-              .thenAnswer((_) async => const Right(null));
-          return cubit;
-        },
-        act: (cubit) => cubit.cachFirstTimer(),
-        expect: () => const [CachingFirstTimer(), FirstTimerCached()],
-        verify: (_) {
-          verify(() => cacheFirstTimer()).called(1);
-          verifyNoMoreInteractions(cacheFirstTimer);
-        });
+      'call cacheFirstTimer, emit[CachingFirstTimer, FirstTimerCached] '
+      'when successful',
+      build: () {
+        when(() => cacheFirstTimer())
+            .thenAnswer((_) async => const Right(null));
+        return cubit;
+      },
+      act: (cubit) => cubit.cachFirstTimer(),
+      expect: () => const [CachingFirstTimer(), FirstTimerCached()],
+      verify: (_) {
+        verify(() => cacheFirstTimer()).called(1);
+        verifyNoMoreInteractions(cacheFirstTimer);
+      },
+    );
   });
 }

@@ -32,6 +32,22 @@ class LocalUserModel extends LocalUser {
               (map['enrolledCoursesIds'] as List<dynamic>).cast<String>(),
         );
 
+  DataMap toMap() {
+    return {
+      'email': email,
+      'uid': uid,
+      'fullName': fullName,
+      'profilePic': profilePic,
+      'score': score,
+      'followings': followings,
+      'followers': followers,
+      'groupsId': groupsId,
+      'enrolledCoursesIds': enrolledCoursesIds,
+      'password': password,
+      'bio': bio,
+    };
+  }
+
   const LocalUserModel.empty()
       : this(
           email: 'empty.email',
@@ -40,7 +56,7 @@ class LocalUserModel extends LocalUser {
           profilePic: 'empty.profilePic',
         );
 
-  LocalUser copyWith({
+  LocalUserModel copyWith({
     String? uid,
     String? fullName,
     String? email,
@@ -53,7 +69,7 @@ class LocalUserModel extends LocalUser {
     String? bio,
     List<String>? enrolledCoursesIds,
   }) {
-    return LocalUser(
+    return LocalUserModel(
       uid: uid ?? this.uid,
       fullName: fullName ?? this.fullName,
       email: email ?? this.email,
@@ -66,19 +82,5 @@ class LocalUserModel extends LocalUser {
       bio: bio ?? this.bio,
       enrolledCoursesIds: enrolledCoursesIds ?? this.enrolledCoursesIds,
     );
-  }
-
-  DataMap toMap() {
-    return {
-      'email': email,
-      'uid': uid,
-      'fullName': fullName,
-      'profilePic': profilePic,
-      'score': score,
-      'followings': followings,
-      'followers': followers,
-      'groupsId': groupsId,
-      'enrolledCoursesIds': enrolledCoursesIds,
-    };
   }
 }

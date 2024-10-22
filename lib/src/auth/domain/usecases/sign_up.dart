@@ -3,8 +3,8 @@ import 'package:school_app/core/usecases/usecases.dart';
 import 'package:school_app/core/utils/typedefs.dart';
 import 'package:school_app/src/auth/domain/repos/auth_repos.dart';
 
-class SignIn extends UsecaseWithParam<void, SignUpParams> {
-  SignIn(this._authRepos);
+class SignUp extends UsecaseWithParam<void, SignUpParams> {
+  SignUp(this._authRepos);
   final AuthRepos _authRepos;
 
   @override

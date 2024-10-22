@@ -14,7 +14,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class DataSource {
-  ResultFuture<void> forgotPassword({required String email});
+  Future<void> forgotPassword({required String email});
   Future<LocalUser> signIn({
     required String email,
     required String password,
@@ -90,12 +90,14 @@ class RemoteDataSourceImpl implements DataSource {
       return LocalUserModel.fromMap(userData.data()!);
     } on FirebaseAuthException catch (e) {
       throw ServerException(
-          message: e.message ?? 'An Error Occured', statusCode: 505);
+        message: e.message ?? 'An Error Occured',
+        statusCode: e.code,
+      );
     } on ServerException {
       rethrow;
     } catch (e, s) {
       debugPrintStack(stackTrace: s);
-      throw ServerException(message: e.toString(), statusCode: '505');
+      throw ServerException(message: e.toString(), statusCode: '504');
     }
   }
 
@@ -105,8 +107,6 @@ class RemoteDataSourceImpl implements DataSource {
     required String email,
     required String password,
   }) async {
-    // TODO: implement signUpflutterfire configure
-
     try {
       final userCred = await _authClient.createUserWithEmailAndPassword(
         email: email,
@@ -117,7 +117,9 @@ class RemoteDataSourceImpl implements DataSource {
       await _setUser(_authClient.currentUser!, email);
     } on FirebaseAuthException catch (e) {
       throw ServerException(
-          message: e.message ?? 'An Error Occured', statusCode: 505);
+        message: e.message ?? 'An Error Occured',
+        statusCode: 505,
+      );
     } catch (e, s) {
       debugPrintStack(stackTrace: s);
       throw ServerException(message: e.toString(), statusCode: '505');
@@ -186,7 +188,7 @@ class RemoteDataSourceImpl implements DataSource {
     await _databaseClient.collection('users').doc(user.uid).set(
           LocalUserModel(
             fullName: user.displayName ?? '',
-            email: user.email ?? '',
+            email: user.email ?? fallBackEmail,
             profilePic: user.photoURL ?? '',
           ).toMap(),
         );
