@@ -79,7 +79,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     const SizedBox(height: 10),
                     const Text(
-                      'Sign up for an account',
+                      'Sign up for an account now',
                       style: TextStyle(fontSize: 14),
                     ),
                     const SizedBox(height: 10),
