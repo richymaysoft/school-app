@@ -88,6 +88,6 @@ class DefaultFirebaseOptions {
     authDomain: 'shopapp-d2025.firebaseapp.com',
     databaseURL: 'https://shopapp-d2025-default-rtdb.firebaseio.com',
     storageBucket: 'shopapp-d2025.appspot.com',
-    measurementId: 'G-7Z35DZQNMQq',
+    measurementId: 'G-7Z35DZQNMQ',
   );
 }
